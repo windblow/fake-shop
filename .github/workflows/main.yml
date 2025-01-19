@@ -16,12 +16,15 @@ jobs:
       with:
         username: ${{ secrets.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_TOKEN }}
-    - name: Contstruir imagem Docker
-      run: echo "Executando o comando docker build"
-    - name: Enviar imagem Docker para o Registry
-      run: echo "Executando o comando docker push"
-    - name: Atualizar tag latest da imagem Docker no Registry
-      run: echo "Executando o comando docker tag"
+    - name: Construir e enviar a imagem Docker
+      uses: docker/build-push-action@v6
+      with:
+        context: ./src
+        push: true
+        file: ./src/Dockerfile
+        tags: |
+          rpsavastano/fake-shop:latest
+          rpsavastano/fake-shop:v${{ github.run_number }}
   cd:
     runs-on: ubuntu-latest
     needs: [ci]

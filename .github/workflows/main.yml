@@ -38,6 +38,6 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: us-east-1
     - name: Configurar o Kubeconfig
-      run: aws eks update-kubeconfig --name cluster-desafios
+      run: aws eks update-kubeconfig --name cluster-desafio
     - name: Aplicar os manifestos no Kubernetes
       run: echo "Executando o comando kubectl apply"

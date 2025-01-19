@@ -9,8 +9,13 @@ jobs:
   ci:
     runs-on: ubuntu-latest
     steps:
+    - name: Obter o código do projeto
+      uses: actions/checkout@v4
     - name: Autenticar no Dockerhub
-      run: echo "Executando o comando docker login"
+      uses: docker/login-action@v3
+      with:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_TOKEN }}
     - name: Contstruir imagem Docker
       run: echo "Executando o comando docker build"
     - name: Enviar imagem Docker para o Registry
